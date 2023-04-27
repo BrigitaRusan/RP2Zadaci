@@ -64,9 +64,12 @@ if ( isset( $_POST['gumb'] ) )
             if( pobjeda() )
             {
               ispisi_cestitku();
-              //session_unset();
-              //session_destroy();
-              //header( 'Location:sokoban.php');
+              session_unset();
+              session_destroy();
+              if ( isset( $_POST['button'] ) )
+              {
+                header( 'Location:sokoban.php');
+              }
             }
             else
             {
@@ -86,9 +89,12 @@ if ( isset( $_POST['gumb'] ) )
         if( pobjeda() )
         {
           ispisi_cestitku();
-          //session_unset();
-          //session_destroy();
-          //header( 'Location:sokoban.php');
+          session_unset();
+          session_destroy();
+          if ( isset( $_POST['button'] ) )
+          {
+            header( 'Location:sokoban.php');
+          }
         }
         else
         {
@@ -526,7 +532,7 @@ function ispisi_cestitku()
       <title>Pobjeda</title>
     </head>
     <body>
-      <h1>Čestitam na pobjedi!</h1>
+      <h1> <?php echo htmlentities($_SESSION['ime'])?>, čestitke na pobjedi!</h1>
       <form action="igra.php" method="post">
       <button type="submit" name="button">Počni igru iz početka!</button>
       </form>
@@ -535,15 +541,4 @@ function ispisi_cestitku()
   <?php
 }
 
-//debug();
-//----------debug------------------------------------------------------------
-function debug()
-{
-    echo '<pre>';
-
-    echo '$_POST = '; print_r( $_POST );
-    echo '$_SESSION = '; print_r( $_SESSION );
-
-    echo '</pre>';
-}
 ?>
