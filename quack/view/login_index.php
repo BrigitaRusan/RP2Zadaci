@@ -14,16 +14,10 @@
         <?php 
         if($los_login) 
             echo "<br><p class = 'bold center'>Login nije uspio, pokušajte ponovno!</p>";
+
+        if($register)
+            echo "<p>Zahvaljujemo na prijavi. Da biste dovršili registraciju, kliknite na link koji smo Vam poslali u mailu.</p>";
         ?>
     </div>
-    <script>
-        let body = document.body,
-            html = document.documentElement;
-
-        let height = Math.max( body.scrollHeight, body.offsetHeight, 
-                       html.clientHeight, html.scrollHeight, html.offsetHeight );
-        $("div.wrapper").css("height", height);
-    </script>
-
     <?php require_once __DIR__."/_footer.php";?>
 </div>

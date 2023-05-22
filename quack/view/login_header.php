@@ -2,12 +2,6 @@
 <html>
 <head>
 	<meta charset='utf8'>
-	<?php
-		if(isset($_SESSION['glavni naslov']))
-			echo '<title>' . $_SESSION['glavni naslov'] . '</title>';
-		else
-			echo '<title>' . $naslov . '</title>';
-	?>
 <style>
 * {box-sizing: border-box;}
 
@@ -36,6 +30,7 @@ body {
 .header a.logo {
   font-size: 25px;
   font-weight: bold;
+  font: garamond pro semibold italic;
 }
 
 .header a:hover {

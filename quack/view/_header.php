@@ -31,12 +31,9 @@ body {
   font-size: 25px;
   font-weight: bold;
   color: #ffff;
+  font: garamond pro semibold italic;
 }
 
-/* .header a:hover {
-  background-color: #ddd;
-  color: black;
-} */
 .header-right {
   float: right;
 }
@@ -44,7 +41,7 @@ body {
   background-color: #fda4ba;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 300px) { //500
   .header a {
     float: none;
     display: block;
@@ -61,7 +58,7 @@ body {
 <body>
 
 <div class="header">
-  <a href="#default" class="logo">Quack!</a>
+  <a  class="logo">Quack!</a>
   <div class="header-right">
     <a class="active" href="quack.php?rt=logout"> <?php echo '<span style="color:white">'. '@'. $_SESSION['user'] ; ?> <br><span style="color: #fda4ba"> Log out</a>
 

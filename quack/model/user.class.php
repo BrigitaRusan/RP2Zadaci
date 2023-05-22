@@ -50,19 +50,50 @@ class User
 			$upit->execute(["username" => $this->username]);
 		}
 		catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
-
-		// ako ne postoji, registriraj korisnika
-		if($upit->rowCount() === 0){
-			try{
-				$upit = $db->prepare("INSERT INTO dz2_users(username, password_hash, email, registration_sequence, has_registered) VALUES (:username, :password, :email, :r_s, :has_registered)");
-				$upit->execute(["username" => $this->username, "password_hash" => $this->password,
-								"email" => $this->email, "registration_sequence" => $this->r_s,"has_registered" => $this->has_registered]);
-			}
-			catch( PDOException $e ) { exit( 'PDO error ' . $e->getMessage() ); }
-
-			return true;
+		if( $upit->rowCount() !== 0 )
+		{
+			// Taj user u bazi već postoji
+			return false;
+			//exit();
 		}
-		return false;
+
+		// Dodaj novog korisnika u bazu. 
+		// Prvo mu generiraj random string od 10 znakova za registracijski link.
+		$registration_sequence = '';
+		for( $i = 0; $i < 20; ++$i )
+			$registration_sequence .= chr( rand(0, 25) + ord( 'a' ) ); // Zalijepi slučajno odabrano slovo
+
+		try
+		{
+			$st = $db->prepare( 'INSERT INTO dz2_users(username, password_hash, email, registration_sequence, has_registered) VALUES ' .
+								'(:username, :password, :email, :registration_sequence, "0")' );
+			
+			$st->execute( array( 'username' => $_POST['username'], 
+								'password' => password_hash( $_POST['password'], PASSWORD_DEFAULT ), 
+								'email' => $_POST['email'], 
+								'registration_sequence'  => $registration_sequence ) );
+		}
+		catch( PDOException $e ) { exit( 'Greška u bazi: ' . $e->getMessage() ); }
+
+		
+		// Sad mu još pošalji mail
+		$to       = $_POST['email'];
+		$subject  = 'Registracijski mail';
+		$message  = 'Poštovani ' . $_POST['username'] . "!\nZa dovršetak registracije kliknite na sljedeći link: ";
+		$message .= 'http://' . $_SERVER['SERVER_NAME'] . htmlentities( dirname( $_SERVER['PHP_SELF'] ) ) . '/register.php?niz=' . $registration_sequence . "\n";
+		$headers  = 'From: rp2@studenti.math.hr' . "\r\n" .
+					'Reply-To: rp2@studenti.math.hr' . "\r\n" .
+					'X-Mailer: PHP/' . phpversion();
+
+		$isOK = mail($to, $subject, $message, $headers);
+
+		if( !$isOK )
+		{
+			exit( 'Greška: ne mogu poslati mail. (Pokrenite na rp2 serveru.)' );
+		}
+
+		return true;
+
 	}
 }
 

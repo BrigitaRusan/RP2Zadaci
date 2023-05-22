@@ -26,6 +26,7 @@ td,th{
 <body>
 <div id ="a">
 
+<form action="quack.php?rt=navigacija/followers" method="post">
 
 <table>
 	<?php
@@ -33,11 +34,11 @@ td,th{
 		{
 			echo '<tr>' .
 			     '<td style="width:800px">' . $user[0] . '</td>' .
-					 '<td style="width:200px"><button>x</button></td>'.
+					 '<td style="width:200px"><button name="brisi" value="'.$user[0].'">x</button></td>'.
 			     '</tr>';
 		}
 	?>
 </table>
-
+</form>
 
 </div>

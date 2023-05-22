@@ -34,10 +34,6 @@ body {
   color: black;
 }
 
-/* .headern a.active {
-  background-color: #fda4ba;
-  color: white;
-} */
 .headern a.active  {
     color: #00abf0!important;
     border-bottom: 1px solid #00abf0!important;
@@ -47,10 +43,11 @@ body {
 .headern {
   float: left;
 }
+}
 
 </style>
   <div class="headern">
-	<a href="#default" class="logo"><img src="quack.jpg" style="width:90px; height:90px;"></a>
+	<a class="logo"><img src="quack.jpg" style="width:90px; height:90px;"></a>
 	<a class="<?php if ($_SESSION['aktivan']=="myquacks") {echo "active"; } else {echo "noactive";}?>"
 	href="quack.php?rt=navigacija/myquacks"> My quacks</a>
 	<a class="<?php if ($_SESSION['aktivan']=="following") {echo "active"; } else {echo "noactive";}?>"
@@ -58,7 +55,7 @@ body {
 	<a class="<?php if ($_SESSION['aktivan']=="followers") {echo "active"; } else {echo "noactive";}?>"
 	href="quack.php?rt=navigacija/followers"> Followers </a>
 	<a class="<?php if ($_SESSION['aktivan']=="quacks") {echo "active"; } else {echo "noactive";}?>"
-	href="quack.php?rt=navigacija/quacks"> quacks</a>
+	href="quack.php?rt=navigacija/quacks"> quacks <?php echo '@'. $_SESSION['user']; ?> </a>
 	<a class="<?php if ($_SESSION['aktivan']=="search") {echo "active"; } else {echo "noactive";}?>"
 	href="quack.php?rt=navigacija/search"> #search</a>
   </div>

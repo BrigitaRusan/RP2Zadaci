@@ -14,7 +14,7 @@ class DB
 	    {
 	    	try
 	    	{
-	    		// Unesi ispravni HOSTNAME, DATABASE, USERNAME i PASSWORD
+	    		// ispravni HOSTNAME, DATABASE, USERNAME i PASSWORD
 		    	DB::$db = new PDO( "mysql: host=rp2.studenti.math.hr;dbname=rusan;charset=utf8",'student','pass.mysql' );
 		    	DB::$db-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		    }

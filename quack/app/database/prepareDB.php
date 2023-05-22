@@ -31,7 +31,7 @@ catch( PDOException $e ) { exit( "PDO error [show tables]: " . $e->getMessage() 
 
 if( $has_tables )
 {
-	exit( 'Tablice dz2_users / dz2_follows / dz2_quacks već postoje. Obrišite ih pa probajte ponovno.' );
+	exit( 'Tablice dz2_users / dz2_follows / dz2_quacks veÄ‡ postoje. ObriĹˇite ih pa probajte ponovno.' );
 }
 
 
@@ -122,7 +122,7 @@ try
 	$st = $db->prepare( 'INSERT INTO dz2_quacks(id_user, quack, date) VALUES (:id_user, :quack, :date)' );
 
 	$st->execute( array( 'id_user' => 1, 'quack' => 'Well done @KingJames and @StephenCurry30 to reach #NBA conference semis. Big fan of both #Lakers and #Warriors!', 'date' => '2023-04-26 12:45:00') );
-	$st->execute( array( 'id_user' => 1, 'quack' => 'Thank you for the kind words, @BillGates. #quack is so much better indeed...', 'date' => '2023-04-28 19:23:45') );
+	$st->execute( array( 'id_user' => 1, 'quack' => 'Thank you for the kind words, @billgates. #quack is so much better indeed...', 'date' => '2023-04-28 19:23:45') );
 	$st->execute( array( 'id_user' => 2, 'quack' => 'First game of #NBA conference semis in #LA on Wednesday!', 'date' => '2023-05-01 17:45:00') );
 	$st->execute( array( 'id_user' => 2, 'quack' => 'Big win over #Memphis! Next up: @StephenCurry30 and #Warriors...', 'date' => '2023-04-19 12:23:00') );
 	$st->execute( array( 'id_user' => 3, 'quack' => 'Congrats to @KingJames and #Lakers for reaching #NBA semis! #seeyousoon', 'date' => '2023-04-19 12:22:45') );

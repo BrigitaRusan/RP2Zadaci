@@ -19,11 +19,29 @@
 table {
   border-spacing: 30px;
 }
+input{
+	margin: 55px;
+	border:1px solid gray;
+	width: 600px;
+	height: 80px;
+	padding: 10px;
+	box-shadow: 2px 2px 15px -2px rgb(50, 50, 50);
+
+}
+button{
+	margin-right: 30px;
+	background-color: #a5e5ff;
+}
 </style>
 </head>
 <body>
-<div id ="a">
 
+<div id ="a">
+<form action = "quack.php?rt=navigacija/myquacks" method = "post" >
+	<input type="text" name="noviquack" placeholder = "Type new quack.." maxlength="140">
+	<input type="hidden" name="submit_time" value="<?php date_default_timezone_set('Europe/Zagreb'); echo date('Y-m-d H:i:s'); ?>">
+	<button type="submit" name ="submit">Post!</button>
+</form>
 
 <table>
 	<?php
