@@ -19,16 +19,19 @@ $( document ).ready( function() {
 
 		if( event.button === 0  ){
 			crtaj_most( koordx, koordy, brojMostova, smjerMosta); //lijevi klik
+			console.log("crtaj" + koordx+" " +koordy);
 		}
 		if( event.button === 2 ) {
 			obrisi_most( koordx, koordy); //desni klik
-			console.log(koordx+" " +koordy);
+			console.log("brisi"+koordx+" " +koordy);
 		}
 
 		if(detektiraj_pobjedu())
 		{
 			ispisi_cestitku();
 		}
+		console.log(mostovi);
+		console.log(stanje_polja);
 	});
 });
 
@@ -84,7 +87,7 @@ function crtaj_polje(){
 function matrica_mostova()
 {
     var n = velicinaPuzzle;
-
+	stanje_polja= [];
     for( var i=0; i<n; i++ ){
 		stanje_polja[i] = [];
 		boja_polja[i] = [];
@@ -112,7 +115,6 @@ function matrica_mostova()
 	mostovi.sort(function(a, b) {
 		return a.x - b.x;
 	  });
-	console.log(mostovi);
 }
 
 function ispisi_mostove()
@@ -154,7 +156,7 @@ function postoji_put( a, b, broj, smjerMosta)
 {
 	var n = velicinaPuzzle;
 	var prvi=undefined, drugi=undefined;
-	if ( smjerMosta === "H" )
+	if ( smjerMosta === "H" && stanje_polja[koordx][koordy]===" ")
  	{
 		for (let i=0; i<=b; i++)
 		{
@@ -172,7 +174,7 @@ function postoji_put( a, b, broj, smjerMosta)
 				break;
 			}
 		}
-		if( prvi!== undefined && drugi!== undefined )
+		if( prvi!== undefined && drugi!== undefined)
 		{
 			if( spoji_otoke(a, prvi, drugi, broj, smjerMosta)) 
 			{ 
@@ -181,7 +183,7 @@ function postoji_put( a, b, broj, smjerMosta)
 			return 1;
 		}
 	}
-	if ( smjerMosta ==="V" )
+	if ( smjerMosta ==="V" && stanje_polja[koordx][koordy]===" ")
 	{
 		for (let i=0; i<=a; i++)
 		{
@@ -199,7 +201,7 @@ function postoji_put( a, b, broj, smjerMosta)
 				break;
 			}
 		}
-		if( prvi!== undefined && drugi!== undefined )
+		if( prvi!== undefined && drugi!== undefined)
 		{
 			if (spoji_otoke(b, prvi, drugi, broj, smjerMosta))
 			{ 
@@ -429,10 +431,7 @@ function detektiraj_pobjedu()
 	{
 		let i = mostovi[m].x ;
 		let j= mostovi[m].y ;
-		if ( mostovi[m].broj !== stanje_polja[i][j])
-		{
-			return 0;
-		}
+		if ( mostovi[m].broj !== stanje_polja[i][j]){ return 0;}
 	}
 	return 1;
 }
@@ -440,8 +439,7 @@ function ispisi_cestitku()
 {
 	$("#cestitka").html("");
 	sessionStorage.clear();
-
-	var p = $("<h1>");
+	var p = $("<p>");
 	p.append("Sagradili ste sve mostove, čestitamo!");
 	$("#cestitka").append(p);
 }
